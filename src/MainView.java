@@ -35,7 +35,7 @@ public class MainView {
 	private JLabel monthLabel = new JLabel();
 	private final JLabel eventsLabel = new JLabel();
 	private JPanel monthPanel;
-	private final JPanel eventsPanel;
+	private final JPanel eventView;
 
 	public MainView(Model m) {
 		//basic initalizaion
@@ -125,7 +125,8 @@ public class MainView {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				FileChooser fc = new FileChooser(model);				
+				FileChooser fc = new FileChooser(model);
+				repaint();
 			}
 		});
 
@@ -223,13 +224,13 @@ public class MainView {
 
 		JScrollPane scroll = new JScrollPane();
 		scroll.setBackground(Color.white);
-		eventsPanel = new JPanel();
-		eventsPanel.setBackground(Color.white);
-		eventsPanel.setLayout(new BorderLayout());
+		eventView = new JPanel();
+		eventView.setBackground(Color.white);
+		eventView.setLayout(new BorderLayout());
 		eventsLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		dayView();
 		scroll.getVerticalScrollBar().setUnitIncrement(16);
-		scroll.getViewport().add(eventsPanel);
+		scroll.getViewport().add(eventView);
 		scroll.setPreferredSize(new Dimension(500, 200));
 		scroll.setVerticalScrollBarPolicy(ScrollPaneLayout.VERTICAL_SCROLLBAR_ALWAYS);
 		scroll.getHorizontalScrollBar().setUnitIncrement(16);
@@ -325,7 +326,7 @@ public class MainView {
 
 	public void dayView() {
 		//reset
-		eventsPanel.removeAll();
+		eventView.removeAll();
 
 		eventsLabel.setText(new SimpleDateFormat("dd MMMM yyyy").format(cal.getTime()));
 		ArrayList<JTextField> fieldList = new ArrayList<>();
@@ -372,9 +373,9 @@ public class MainView {
 			t.add(b);
 			timePanel.add(t);
 		}
-		eventsPanel.add(eventsLabel, BorderLayout.NORTH);
-		eventsPanel.add(timePanel, BorderLayout.WEST);
-		eventsPanel.add(dayHolder, BorderLayout.CENTER);
+		eventView.add(eventsLabel, BorderLayout.NORTH);
+		eventView.add(timePanel, BorderLayout.WEST);
+		eventView.add(dayHolder, BorderLayout.CENTER);
 		ArrayList<CalendarEvent>  eventList = model.getEvents();
 		if(eventList != null) {
 			for(CalendarEvent event : eventList) {
@@ -404,15 +405,15 @@ public class MainView {
 				}
 			}
 		}
-		eventsPanel.revalidate();
-		eventsPanel.repaint();
+		eventView.revalidate();
+		eventView.repaint();
 	}
 
 
 	public void weekView() {
-		eventsPanel.removeAll();
+		eventView.removeAll();
 
-		eventsPanel.setBackground(Color.WHITE);
+		eventView.setBackground(Color.WHITE);
 		Border border = BorderFactory.createLineBorder(new Color(241, 241, 241));
 		Calendar temp  = new GregorianCalendar();		
 		temp.setTime(cal.getTime());
@@ -479,14 +480,14 @@ public class MainView {
 		}
 
 
-		eventsPanel.add(eventsLabel, BorderLayout.NORTH);
-		eventsPanel.add(timePanel, BorderLayout.CENTER);
-		eventsPanel.revalidate();
-		eventsPanel.repaint();
+		eventView.add(eventsLabel, BorderLayout.NORTH);
+		eventView.add(timePanel, BorderLayout.CENTER);
+		eventView.revalidate();
+		eventView.repaint();
 	}
 
 	public void monthView() {
-		eventsPanel.removeAll();
+		eventView.removeAll();
 		
 		Border border = BorderFactory.createLineBorder(new Color(241, 241, 241));
 		DateFormat format = new SimpleDateFormat("MMMMM YYYY");
@@ -547,16 +548,16 @@ public class MainView {
 		
 
 
-		eventsPanel.add(eventsLabel, BorderLayout.NORTH);
-		eventsPanel.add(timePanel,BorderLayout.CENTER);
-		eventsPanel.revalidate();
-		eventsPanel.repaint();
+		eventView.add(eventsLabel, BorderLayout.NORTH);
+		eventView.add(timePanel,BorderLayout.CENTER);
+		eventView.revalidate();
+		eventView.repaint();
 	}
 	
 	
 
 	public void agendaView() {
-		eventsPanel.removeAll();
+		eventView.removeAll();
 		eventsLabel.setText("Agenda");
 		DateFormat label = new SimpleDateFormat("EEE MMM d, yyyy");
 		DateFormat timeLabel = new SimpleDateFormat("h:mm a"	);
@@ -579,10 +580,10 @@ public class MainView {
 			holder.add(eventLabel);
 		}
 
-		eventsPanel.add(eventsLabel, BorderLayout.NORTH);
-		eventsPanel.add(holder, BorderLayout.CENTER);
-		eventsPanel.revalidate();
-		eventsPanel.repaint();
+		eventView.add(eventsLabel, BorderLayout.NORTH);
+		eventView.add(holder, BorderLayout.CENTER);
+		eventView.revalidate();
+		eventView.repaint();
 	}
 
 	public void repaintMonth() {
@@ -594,7 +595,7 @@ public class MainView {
 
 	public void repaint() {
 		repaintMonth();
-		eventsPanel.removeAll();
+		eventView.removeAll();
 		switch (state) 
 		{
 		case Calendar.DAY_OF_MONTH:
@@ -611,8 +612,8 @@ public class MainView {
 			break;
 
 		}
-		eventsPanel.revalidate();
-		eventsPanel.repaint();
+		eventView.revalidate();
+		eventView.repaint();
 
 	}
 }
