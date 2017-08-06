@@ -45,7 +45,6 @@ public class CalendarSaver {
 				for(String str : list) {
 					model.add(this.parse(str));
 				}
-				file.delete();
 				System.out.println("Loading complete!");
 			}
 			catch (Exception e) {
