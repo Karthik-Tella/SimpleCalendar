@@ -98,7 +98,7 @@ public class CalendarEvent implements Comparable<CalendarEvent> {
 
 	/**
 	 * Converts the event into a String which can be parsed back for saving it into persistent memory
-	 * @return String representation of the evnet 
+	 * @return String representation of the event 
 	 */
 	public String eventPrint() {
 		String str;

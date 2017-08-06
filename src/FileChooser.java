@@ -26,4 +26,23 @@ public class FileChooser {
 		    System.out.println("Selected file: " + selectedFile.getAbsolutePath());
 		}
 	}
+	
+	public void parse(String str) {
+		int state = 0;
+		int counter = 0;
+		String name = "";
+		String year = "";
+		String startMon = "";
+		String endMon = "";
+		String seq = "";
+		String start = "";
+		String end = "";
+		
+		
+		for(int i = 0; i < str.length(); i++) {
+			if(str.charAt(i) == ';' ) {
+				
+			}
+		}
+	}
 }

@@ -1,4 +1,7 @@
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.xml.stream.events.EntityDeclaration;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,18 +27,24 @@ public class EventView {
 
 		final JFrame frame = new JFrame();
 		JPanel container = new JPanel();
+		container.setBorder(new EmptyBorder(10, 10, 10, 10));
 		container.setBackground(Color.white);
-
-		final JTextField task = new JTextField("Enter Task Here...");
+		container.setLayout(new GridLayout(0, 2,5,5));
+		
+		JLabel entryLabel = new JLabel("Event Name:");
+		final JTextField task = new JTextField();
 
 		GregorianCalendar cal = model.getCalendar();
+		JLabel dateLabel = new JLabel("Date (mm/dd/yyyy):");
 		DateFormat format = new SimpleDateFormat("M/d/yyyy");
 		final JTextField date = new JTextField(format.format(cal.getTime()));
 
 		GregorianCalendar g  = new GregorianCalendar();
+		JLabel startTime = new JLabel("Starting Time:");
 		format = new SimpleDateFormat("hh:mmaa");
 		final JTextField start = new JTextField(format.format(g.getTime()));
-
+		
+		JLabel endTime = new JLabel("Ending Time:");
 		g.add(Calendar.MINUTE, 90);
 		final JTextField end = new JTextField(format.format(g.getTime()));
 
@@ -43,12 +52,15 @@ public class EventView {
 		JButton cancel = new JButton("Cancel");
 		create.setBackground(new Color(64, 132, 242));
 		create.setForeground(Color.white);
-		cancel.setBackground(new Color(245, 245, 245));
+		cancel.setBackground(Color.WHITE);
 		
-
+		container.add(entryLabel);
 		container.add(task);
+		container.add(dateLabel);
 		container.add(date);
+		container.add(startTime);
 		container.add(start);
+		container.add(endTime);
 		container.add(end);
 		container.add(create);
 		container.add(cancel);
