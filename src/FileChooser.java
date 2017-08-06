@@ -21,7 +21,7 @@ public class FileChooser {
 	public FileChooser(Model m ){
 		this.model = m;
 		JFileChooser jFileChooser = new JFileChooser();
-		//jFileChooser.setCurrentDirectory(new File("/User/alvinreyes"));
+		//jFileChooser.setCurrentDirectory(new File("/User/karth"));
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("TEXT FILES", "txt", "text");
 		jFileChooser.setFileFilter(filter);
 
@@ -34,7 +34,6 @@ public class FileChooser {
 			System.out.println("Selected file: " + file.getAbsolutePath());
 			if(file.exists()) {
 				try {
-					System.out.println("in process");
 					FileReader fr = new FileReader(file);
 					BufferedReader br = new BufferedReader(fr);
 					String line = br.readLine();
@@ -77,6 +76,7 @@ public class FileChooser {
 					Date endTime = temp.getTime();
 
 					CalendarEvent event = new CalendarEvent(name, startTime, endTime);
+					//Comment to ignore collisions
 					boolean check = false;
 					if(!event.isLegal()) {
 						JOptionPane.showMessageDialog(null,"Invalid end time, please re-enter yout data");

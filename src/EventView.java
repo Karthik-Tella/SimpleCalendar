@@ -119,6 +119,7 @@ public class EventView {
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.add(container);
 		frame.pack();
+		frame.setResizable(false);
 		frame.setVisible(true);
 	}
 

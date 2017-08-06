@@ -38,7 +38,7 @@ public class MainView {
 	private final JPanel eventView;
 
 	public MainView(Model m) {
-		//basic initalizaion
+		//basic initialization 
 		this.model = m;
 		this.cal = model.getCalendar();
 		state = Calendar.DAY_OF_MONTH;
@@ -197,7 +197,7 @@ public class MainView {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+
 				model.alterMV(1);
 			}
 		});
@@ -206,12 +206,11 @@ public class MainView {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				model.alterMV(-1);
 			}
 		});
-		//		nextDay.setPreferredSize(new Dimension(40, 40));
-		//		prevDay.setPreferredSize(new Dimension(40, 40));
+
+
 		innerButton.add(prevMonth);
 		innerButton.add(nextMonth);
 		headLine.add(monthLabel);
@@ -221,14 +220,14 @@ public class MainView {
 		monthView.add(headLine);
 		monthView.add(monthPanel);
 
-
-		JScrollPane scroll = new JScrollPane();
-		scroll.setBackground(Color.white);
 		eventView = new JPanel();
 		eventView.setBackground(Color.white);
 		eventView.setLayout(new BorderLayout());
 		eventsLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		dayView();
+		dayView();		
+
+		JScrollPane scroll = new JScrollPane();
+		scroll.setBackground(Color.white);
 		scroll.getVerticalScrollBar().setUnitIncrement(16);
 		scroll.getViewport().add(eventView);
 		scroll.setPreferredSize(new Dimension(500, 200));
@@ -240,32 +239,35 @@ public class MainView {
 		frame.setBackground(Color.WHITE);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLayout(new BorderLayout());
-		//Adding components to the frame
+
+		//adding components
 		frame.add(buttonHolder, BorderLayout.NORTH);
 		frame.add(monthView, BorderLayout.WEST);
 		frame.add(scroll, BorderLayout.EAST);
-
+		frame.setResizable(false);
 		frame.pack();
 		frame.setVisible(true);
 	}
 
-
-
 	public void mvDraw(JPanel monthPanel) {	
+
 		DateFormat df = new SimpleDateFormat("MMMMM yyyy");
 		monthLabel.setText(df.format(cal.getTime()));
-		//drawing all the days of a week
+
 		for(DAYS d : DAYS.values() ) {
 			monthPanel.add(new JLabel(d+""));
 		}
 
-		//adding the days of the month
-		int daysOfMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+
 		GregorianCalendar tempCal = new GregorianCalendar(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), 1);
 		int firstDay = tempCal.get(Calendar.DAY_OF_WEEK);		
+		int daysOfMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
 		tempCal.add(Calendar.MONTH,-1);
+
 		int cont = tempCal.getActualMaximum(Calendar.DAY_OF_MONTH);
 		cont -= firstDay; 
+
+
 		for(int i = 1; i <= 42; i++) {
 			if(i<firstDay) {
 				JLabel jl = new JLabel(cont+i+1+"");
@@ -308,13 +310,12 @@ public class MainView {
 
 					@Override
 					public void mouseClicked(MouseEvent e) {
-						// TODO Auto-generated method stub
 						int num = Integer.parseInt(dayLabel.getText());
 						model.setDay(num);
 					}
 				});
-				int nowSelected = i - firstDay + 1;
 
+				int nowSelected = i - firstDay + 1;
 				if(nowSelected == cal.get(Calendar.DAY_OF_MONTH)) {
 					dayLabel.setBorder(BorderFactory.createLineBorder(Color.blue));
 				}
@@ -325,7 +326,7 @@ public class MainView {
 
 
 	public void dayView() {
-		//reset
+		//		Reset
 		eventView.removeAll();
 
 		eventsLabel.setText(new SimpleDateFormat("dd MMMM yyyy").format(cal.getTime()));
@@ -345,33 +346,33 @@ public class MainView {
 		JPanel timePanel = new JPanel();
 		timePanel.setLayout(new BoxLayout(timePanel, BoxLayout.PAGE_AXIS));
 		for(int i = 0 ; i < 24;i++) {
-			JPanel t = new JPanel();
-			t.setBackground(Color.white);
-			t.setLayout(new GridLayout(2,1));
-			JTextField a = new JTextField(5);
-			JTextField b = new JTextField(5);
-			a.setBackground(Color.white);
-			a.setBorder(border);
-			b.setBackground(Color.white);
-			b.setBorder(border);
+			JPanel holder = new JPanel();
+			holder.setBackground(Color.white);
+			holder.setLayout(new GridLayout(2,1));
+			JTextField first = new JTextField(5);
+			JTextField half = new JTextField(5);
+			first.setBackground(Color.white);
+			first.setBorder(border);			
+			half.setBackground(Color.white);
+			half.setBorder(border);
 			String tag = "PM";
-			int currentHour = i;
-			if(currentHour < 12) {
+			int hour = i;
+			if(hour < 12) {
 				tag = "AM";
 			}
-			if (currentHour == 0) {
-				currentHour += 12;
+			if (hour == 0) {
+				hour += 12;
 			}
-			if (currentHour > 12) {
-				currentHour -= 12;
+			if (hour > 12) {
+				hour -= 12;
 			}
-			a.setText(currentHour + ":00"+ tag );
-			a.setEditable(false);
-			b.setText(currentHour + ":30"+ tag );
-			b.setEditable(false);
-			t.add(a);
-			t.add(b);
-			timePanel.add(t);
+			first.setText(hour + ":00"+ tag );
+			first.setEditable(false);
+			half.setText(hour + ":30"+ tag );
+			half.setEditable(false);
+			holder.add(first);
+			holder.add(half);
+			timePanel.add(holder);
 		}
 		eventView.add(eventsLabel, BorderLayout.NORTH);
 		eventView.add(timePanel, BorderLayout.WEST);
@@ -413,20 +414,21 @@ public class MainView {
 	public void weekView() {
 		eventView.removeAll();
 
-		eventView.setBackground(Color.WHITE);
 		Border border = BorderFactory.createLineBorder(new Color(241, 241, 241));
-		Calendar temp  = new GregorianCalendar();		
-		temp.setTime(cal.getTime());
-
 		DateFormat format = new SimpleDateFormat("EEE dd/MM");
+		Calendar temp  = new GregorianCalendar();		
 
+		temp.setTime(cal.getTime());
 		temp.add(Calendar.DAY_OF_MONTH, 1-temp.get(Calendar.DAY_OF_WEEK));
+
 		String headLine = format.format(temp.getTime());
 
 		temp.add(Calendar.DAY_OF_MONTH, 6);
+
 		headLine += " - " + format.format(temp.getTime());
 
 		eventsLabel.setText(headLine);
+
 		JPanel timePanel = new JPanel();
 		timePanel.setBackground(Color.WHITE);
 		timePanel.setLayout(new FlowLayout());
@@ -440,7 +442,6 @@ public class MainView {
 			JTextField header = new JTextField(format.format(temp.getTime()),10);
 			header.setFont(new Font("Arial", Font.BOLD, 12));
 			header.setBorder(border);
-			//			header.setForeground(new Color(251, 188, 5));
 			header.setBackground(Color.white);
 			header.setEditable(false);
 			days.add(header);
@@ -488,7 +489,7 @@ public class MainView {
 
 	public void monthView() {
 		eventView.removeAll();
-		
+
 		Border border = BorderFactory.createLineBorder(new Color(241, 241, 241));
 		DateFormat format = new SimpleDateFormat("MMMMM YYYY");
 		eventsLabel.setText(format.format(cal.getTime()));
@@ -522,6 +523,7 @@ public class MainView {
 					counter++;
 				}
 			}
+
 			if(counter == 0 ) {
 				JTextField eve = new JTextField("No Event",10);
 				eve.setForeground(new Color(200,200,200));
@@ -531,6 +533,7 @@ public class MainView {
 				days.add(eve);
 				counter++;
 			}
+
 			if(counter < 48) {
 				for(int j = 0; j < 48 - counter; j++) {
 					JTextField eve = new JTextField("-",10);
@@ -544,35 +547,33 @@ public class MainView {
 			timePanel.add(days);
 			temp.add(Calendar.DAY_OF_MONTH, 1);
 		}
-		
-		
-
 
 		eventView.add(eventsLabel, BorderLayout.NORTH);
 		eventView.add(timePanel,BorderLayout.CENTER);
 		eventView.revalidate();
 		eventView.repaint();
 	}
-	
-	
+
+
 
 	public void agendaView() {
 		eventView.removeAll();
 		eventsLabel.setText("Agenda");
-		DateFormat label = new SimpleDateFormat("EEE MMM d, yyyy");
-		DateFormat timeLabel = new SimpleDateFormat("h:mm a"	);
+		DateFormat format = new SimpleDateFormat("EEE MMM d, yyyy");
+		DateFormat timeFormat = new SimpleDateFormat("h:mm a"	);
 		JPanel holder =  new JPanel();
 		holder.setBackground(Color.WHITE);
 		holder.setLayout(new BoxLayout(holder, BoxLayout.Y_AXIS));
 		holder.setBorder(new EmptyBorder(10, 10, 10, 10));
-		
+
 		for(CalendarEvent e : model.getEvents()) {
-//			JPanel eventHolder = new JPanel();
-//			eventHolder.setBackground(Color.white);
-//			eventHolder.setLayout(new FlowLayout());
-			String str = label.format(e.getStart());
+			JPanel eventHolder = new JPanel();
+			eventHolder.setBackground(Color.white);
+			eventHolder.setLayout(new BorderLayout());
+			
+			String str = format.format(e.getStart());
 			str += "     ";
-			str += timeLabel.format(e.getStart()) + " - " + timeLabel.format(e.getEnd());
+			str += timeFormat.format(e.getStart()) + " - " + timeFormat.format(e.getEnd());
 			str += "     ";
 			str += e.getName();
 			JLabel eventLabel = new JLabel(str);
