@@ -1,4 +1,4 @@
-package src;
+
 
 import java.util.*;
 
@@ -69,7 +69,7 @@ public class Model {
 	 */
 	public void alterMV(int num) {
 		cal.add(Calendar.MONTH, num);
-		view.repaintMonth();
+		view.repaintNavigation();
 	}
 	
 	/**
@@ -109,4 +109,13 @@ public class Model {
 	public void add(CalendarEvent event) {
 		events.add(event);
 	}
+	
+	public void save(Saver sav) {
+		this.saver.setSaver(sav);
+		this.saver.add();
+	}
+	
+
+
+
 }

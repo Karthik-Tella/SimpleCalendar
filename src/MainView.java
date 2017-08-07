@@ -23,12 +23,14 @@ enum DAYS{
 	Sun, Mon, Tue, Wed, Thu, Fri, Sat;
 }
 
-
+/**
+ * View class of the calendar application 
+ * @author Karthik Tella
+ *
+ */
 public class MainView {
-
+	//instance variables
 	private int state;
-
-
 	private Model model;
 	private GregorianCalendar cal;
 	private JFrame frame;
@@ -49,7 +51,7 @@ public class MainView {
 		monthPanel = new JPanel();
 		monthPanel.setLayout(new GridLayout(7,7,5,5));
 		monthPanel.setBackground(Color.WHITE);
-		mvDraw(monthPanel);
+		drawNavigation(monthPanel);
 
 		JPanel monthView = new JPanel();
 		monthView.setBorder(new EmptyBorder(10, 10, 10, 10));
@@ -135,9 +137,12 @@ public class MainView {
 		frame.pack();
 		frame.setVisible(true);
 	}
-
-	public void mvDraw(JPanel monthPanel) {	
-
+	
+	/**
+	 * Adds the navigation view components
+	 * @param monthPanel the panel to be modified
+	 */
+	public void drawNavigation(JPanel monthPanel) {	
 		DateFormat df = new SimpleDateFormat("MMMMM yyyy");
 		monthLabel.setText(df.format(cal.getTime()));
 
@@ -211,7 +216,9 @@ public class MainView {
 		}
 	}
 
-
+	/**
+	 * Adds the day view components to the calendar app
+	 */
 	public void dayView() {
 		//		Reset
 		eventView.removeAll();
@@ -297,7 +304,9 @@ public class MainView {
 		eventView.repaint();
 	}
 
-
+	/**
+	 * Adds the week view component to the calendar app
+	 */
 	public void weekView() {
 		eventView.removeAll();
 
@@ -373,7 +382,10 @@ public class MainView {
 		eventView.revalidate();
 		eventView.repaint();
 	}
-
+	
+	/**
+	 * Adds the month view components to the calendar app
+	 */
 	public void monthView() {
 		eventView.removeAll();
 
@@ -442,7 +454,9 @@ public class MainView {
 	}
 
 
-
+	/**
+	 * Adds JLabels of all readable event to the calendar app
+	 */
 	public void agendaView() {
 		eventView.removeAll();
 		eventsLabel.setText("Agenda");
@@ -473,16 +487,22 @@ public class MainView {
 		eventView.revalidate();
 		eventView.repaint();
 	}
-
-	public void repaintMonth() {
+	
+	/**
+	 * Repaints the navigation 
+	 */
+	public void repaintNavigation() {
 		monthPanel.removeAll();
-		mvDraw(monthPanel);
+		drawNavigation(monthPanel);
 		monthPanel.revalidate();
 		monthPanel.repaint();
 	}
-
+	
+	/**
+	 * Repaints the view
+	 */
 	public void repaint() {
-		repaintMonth();
+		repaintNavigation();
 		eventView.removeAll();
 		switch (state) 
 		{
@@ -505,10 +525,18 @@ public class MainView {
 
 	}
 	
+	/**
+	 * Accessor: Returns the state of the calendar
+	 * @return state of the calendar
+	 */
 	public int getState() {
 		return state;
 	}
 	
+	/**
+	 * Mutator: Sets the state of the calendar
+	 * @param state current state of the calendar
+	 */
 	public void setState(int state) { 
 		this.state = state;
 	}

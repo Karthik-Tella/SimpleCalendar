@@ -34,6 +34,7 @@ public class Controller extends JPanel {
 
 		UIManager.put("ToggleButton.select", new Color(64, 132, 242));
 		SwingUtilities.updateComponentTreeUI(saveXML);
+		
 
 		//toggle functionality
 		saveXML.addItemListener(new ItemListener() {
@@ -42,11 +43,13 @@ public class Controller extends JPanel {
 			public void itemStateChanged(ItemEvent e) {
 				// TODO Auto-generated method stub
 				if(e.getStateChange()==ItemEvent.SELECTED){
+					saveXML.setForeground(Color.white);
 					System.out.println("xml");
 					model.save(new XmlSaver());
 
 				} 
 				else if(e.getStateChange()==ItemEvent.DESELECTED){
+					saveXML.setForeground(Color.BLACK);
 					System.out.println("txt");
 					model.save(new TxtSaver());
 				}
