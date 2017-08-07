@@ -100,7 +100,7 @@ public class FileChooser {
 						}
 					}
 					//Comment to ignore collisions
-//					if(!check)
+					if(!check)
 						model.add(event);
 				}
 			}

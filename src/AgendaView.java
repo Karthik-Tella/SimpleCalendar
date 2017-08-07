@@ -34,18 +34,17 @@ public class AgendaView {
 
 		frame = new JFrame();
 		JPanel container = new JPanel();
-		container.setBorder(new EmptyBorder(10, 10, 10, 10));
+		container.setBorder(new EmptyBorder(5,5,5,5));
 		container.setBackground(Color.white);
 		container.setLayout(new BorderLayout());
 
 		JPanel timeHolder = new JPanel();
 		timeHolder.setBackground(Color.white);
-		timeHolder.setLayout(new GridLayout(0, 2, 10, 10));
-		timeHolder.setBorder(new EmptyBorder(5,5,5,5));
+		timeHolder.setLayout(new GridLayout(0, 2, 5, 5));
 
 		JLabel rangeLabel = new JLabel("Enter a calendar range.");
 		rangeLabel.setBackground(Color.white);
-
+		rangeLabel.setBorder(new EmptyBorder(5,5,5,5));
 
 		JLabel startLabel = new JLabel("Start date:");
 		JLabel endLabel = new JLabel("End date:");
