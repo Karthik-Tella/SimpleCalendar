@@ -15,6 +15,10 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
+/**
+ * Controller file to exchange data between 
+ * Model and View
+ */
 public class Controller extends JPanel {
 	private Model model;
 	private MainView view;
@@ -38,7 +42,11 @@ public class Controller extends JPanel {
 
 		//toggle functionality
 		saveXML.addItemListener(new ItemListener() {
-
+			
+			/**
+			 *  Check if ItemStateChange to determine 
+			 *  save as txt or xml 
+			 */
 			@Override
 			public void itemStateChanged(ItemEvent e) {
 				// TODO Auto-generated method stub
@@ -165,6 +173,9 @@ public class Controller extends JPanel {
 		this.add(saveXML);
 	}
 
+	/**
+	 * Access Model from MainView
+	 */
 	public MainView getModel() {
 		return view;
 	}
