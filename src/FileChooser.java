@@ -23,7 +23,9 @@ public class FileChooser {
 		JFileChooser jFileChooser = new JFileChooser();
 		//jFileChooser.setCurrentDirectory(new File("/User/karth"));
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("TEXT FILES", "txt", "text");
+		FileNameExtensionFilter xmlfilter = new FileNameExtensionFilter("xml files (*.xml)", "xml");
 		jFileChooser.setFileFilter(filter);
+		jFileChooser.addChoosableFileFilter(xmlfilter);
 
 
 		int result = jFileChooser.showOpenDialog(new JFrame());

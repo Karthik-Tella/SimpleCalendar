@@ -25,7 +25,7 @@ public class Controller extends JPanel {
 		JButton monthButton = new JButton("Month");
 		JButton agendaButton = new JButton("Agenda");
 		JButton fromFile = new JButton("From File");
-
+		
 		//Button functionality
 		today.addActionListener(new ActionListener() {
 
@@ -103,6 +103,7 @@ public class Controller extends JPanel {
 			}
 		});
 		
+		
 		//Button style
 				Color buttonColor = new Color(245, 245, 245);
 				today.setBackground(buttonColor);
@@ -130,5 +131,9 @@ public class Controller extends JPanel {
 				this.add(Box.createRigidArea(new Dimension(10,0)));
 				this.add(fromFile);
 
+	}
+
+	public MainView getModel() {
+		return view;
 	}
 }
