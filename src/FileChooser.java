@@ -14,10 +14,15 @@ import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 
-
+/**
+ * To Choose Correct Event File
+ */
 public class FileChooser {
 	private Model model;
-
+	
+	/**
+	 * FileChoose Class
+	 */
 	public FileChooser(Model m ){
 		this.model = m;
 		JFileChooser jFileChooser = new JFileChooser();
@@ -54,6 +59,9 @@ public class FileChooser {
 		}
 	}
 
+	/**
+	 * Parse the file and add events
+	 */
 	public void parseAndAdd(String str) {
 		Calendar temp = new GregorianCalendar();
 		String[] events = str.split(";");
@@ -99,6 +107,9 @@ public class FileChooser {
 		}
 	}
 
+	/**
+	 * Check the date info
+	 */
 	private String dOW(Date date) {
 		DateFormat format = new SimpleDateFormat("E");
 		String str = format.format(date);
