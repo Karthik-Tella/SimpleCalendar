@@ -1,4 +1,13 @@
+package src;
+
 import java.util.*;
+
+/**
+ * This is the model of the project
+ * which has data
+ * @author Team3
+ *
+ */
 public class Model {
 	private GregorianCalendar cal;
 	private MainView view;
@@ -6,6 +15,10 @@ public class Model {
 	private ArrayList<CalendarEvent> events;
 	private CalendarSaver saver;
 	
+	/**
+	 * Model contains calendar, views,
+	 * events, and saver.
+	 */
 	public Model() {
 		cal = new GregorianCalendar();
 		view = new MainView(this);
@@ -23,6 +36,7 @@ public class Model {
 	public GregorianCalendar getCalendar() {
 		return cal;
 	}
+	
 	/**
 	 * Increments the calendar date by a day
 	 * 
@@ -49,11 +63,18 @@ public class Model {
 		view.repaint();
 	}
 	
+	/**
+	 * Sets the month view of the instance calendar
+	 * @param num day to which the calendar is to be set to
+	 */
 	public void alterMV(int num) {
 		cal.add(Calendar.MONTH, num);
 		view.repaintMonth();
 	}
 	
+	/**
+	 * Resets the Today view.
+	 */
 	public void reset() {
 		cal.setTime(today);
 		view.repaint();
@@ -88,18 +109,4 @@ public class Model {
 	public void add(CalendarEvent event) {
 		events.add(event);
 	}
-	
-	public void save(Saver sav) {
-		this.saver.setSaver(sav);
-		this.saver.add();
-	}
-	
-//	/**
-//	 * Initiates the exit sequence by saving all the events in the list into persistent memory 
-//	 */
-//	public void exitSeq() {
-//		System.out.println("Exit Sequence Status: 0");
-//		saver.quit();
-//	}
-
 }
