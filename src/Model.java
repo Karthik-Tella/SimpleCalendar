@@ -119,6 +119,11 @@ public class Model {
 		this.saver.add();
 	}
 	
+	
+	public void av(Date start, Date end) {
+		view.agendaView(start, end);
+	}
+	
 
 
 

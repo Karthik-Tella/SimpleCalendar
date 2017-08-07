@@ -38,6 +38,8 @@ public class MainView {
 	private final JLabel eventsLabel = new JLabel();
 	private JPanel monthPanel;
 	private final JPanel eventView;
+	private Date start;
+	private Date end;
 
 	public MainView(Model m) {
 		//basic initialization 
@@ -46,6 +48,11 @@ public class MainView {
 		state = Calendar.DAY_OF_MONTH;
 		Color buttonColor = new Color(245, 245, 245);
 		Controller controller = new Controller(model, this);
+		start = cal.getTime();
+		cal.add(Calendar.DAY_OF_MONTH, 1);
+		end = cal.getTime();
+		cal.add(Calendar.DAY_OF_MONTH, -1);
+
 
 		//Month view
 		monthPanel = new JPanel();
@@ -137,7 +144,7 @@ public class MainView {
 		frame.pack();
 		frame.setVisible(true);
 	}
-	
+
 	/**
 	 * Adds the navigation view components
 	 * @param monthPanel the panel to be modified
@@ -382,7 +389,7 @@ public class MainView {
 		eventView.revalidate();
 		eventView.repaint();
 	}
-	
+
 	/**
 	 * Adds the month view components to the calendar app
 	 */
@@ -457,29 +464,36 @@ public class MainView {
 	/**
 	 * Adds JLabels of all readable event to the calendar app
 	 */
-	public void agendaView() {
+	public void agendaView(Date start, Date end) {
+		this.start = start;
+		this.end = end;
+		System.out.println("in av");
 		eventView.removeAll();
 		eventsLabel.setText("Agenda");
 		DateFormat format = new SimpleDateFormat("EEE MMM d, yyyy");
 		DateFormat timeFormat = new SimpleDateFormat("h:mm a"	);
+		DateFormat compFormat = new SimpleDateFormat("MM/d/yyyy");
 		JPanel holder =  new JPanel();
 		holder.setBackground(Color.WHITE);
 		holder.setLayout(new BoxLayout(holder, BoxLayout.Y_AXIS));
 		holder.setBorder(new EmptyBorder(10, 10, 10, 10));
 
 		for(CalendarEvent e : model.getEvents()) {
-			JPanel eventHolder = new JPanel();
-			eventHolder.setBackground(Color.white);
-			eventHolder.setLayout(new BorderLayout());
-			
-			String str = format.format(e.getStart());
-			str += "     ";
-			str += timeFormat.format(e.getStart()) + " - " + timeFormat.format(e.getEnd());
-			str += "     ";
-			str += e.getName();
-			JLabel eventLabel = new JLabel(str);
-			eventLabel.setFont(new Font("Arial", Font.PLAIN, 12));
-			holder.add(eventLabel);
+			if(e.getStart().after(start) && e.getStart().before(end) && e.getEnd().after(start) && e.getEnd().before(end))
+			{
+				JPanel eventHolder = new JPanel();
+				eventHolder.setBackground(Color.white);
+				eventHolder.setLayout(new BorderLayout());
+
+				String str = format.format(e.getStart());
+				str += "     ";
+				str += timeFormat.format(e.getStart()) + " - " + timeFormat.format(e.getEnd());
+				str += "     ";
+				str += e.getName();
+				JLabel eventLabel = new JLabel(str);
+				eventLabel.setFont(new Font("Arial", Font.PLAIN, 12));
+				holder.add(eventLabel);
+			}
 		}
 
 		eventView.add(eventsLabel, BorderLayout.NORTH);
@@ -487,7 +501,7 @@ public class MainView {
 		eventView.revalidate();
 		eventView.repaint();
 	}
-	
+
 	/**
 	 * Repaints the navigation 
 	 */
@@ -497,7 +511,7 @@ public class MainView {
 		monthPanel.revalidate();
 		monthPanel.repaint();
 	}
-	
+
 	/**
 	 * Repaints the view
 	 */
@@ -516,7 +530,7 @@ public class MainView {
 			monthView();
 			break;
 		case 0:
-			agendaView();
+			agendaView(start,end);
 			break;
 
 		}
@@ -524,7 +538,7 @@ public class MainView {
 		eventView.repaint();
 
 	}
-	
+
 	/**
 	 * Accessor: Returns the state of the calendar
 	 * @return state of the calendar
@@ -532,7 +546,7 @@ public class MainView {
 	public int getState() {
 		return state;
 	}
-	
+
 	/**
 	 * Mutator: Sets the state of the calendar
 	 * @param state current state of the calendar

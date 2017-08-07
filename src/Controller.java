@@ -129,7 +129,7 @@ public class Controller extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				view.setState(0);
-				view.agendaView();
+				AgendaView av = new AgendaView(model);
 			}
 		});
 
