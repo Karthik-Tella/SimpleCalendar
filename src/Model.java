@@ -110,6 +110,10 @@ public class Model {
 		events.add(event);
 	}
 	
+	/**
+	 * Strategy helper method 
+	 * @param sav the saver class to be used
+	 */
 	public void save(Saver sav) {
 		this.saver.setSaver(sav);
 		this.saver.add();
