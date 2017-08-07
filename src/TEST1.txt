@@ -1,0 +1,12 @@
+Math Class;2017;1;2;MWF;17;18;
+English Class;2017;3;4;MWF;17;18;
+Both Class;2017;5;6;MWF;17;18;
+PE Class;2017;7;8;MWF;17;18;
+Phys Class;2017;9;10;MWF;17;18;
+Chem Class;2017;11;12;MWF;17;18;
+CS Class;2017;1;2;MWF;7;8;
+CMPE Class;2017;3;4;MWF;7;8;
+UNI Class;2017;5;6;MWF;7;8;
+RTVF Class;2017;7;8;MWF;7;8;
+CMPE12 Class;2017;9;10;MWF;7;8;
+SE121 Class;2017;11;12;MWF;7;8;

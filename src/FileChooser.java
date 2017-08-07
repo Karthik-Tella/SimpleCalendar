@@ -78,7 +78,6 @@ public class FileChooser {
 					Date endTime = temp.getTime();
 
 					CalendarEvent event = new CalendarEvent(name, startTime, endTime);
-					//Comment to ignore collisions
 					boolean check = false;
 					if(!event.isLegal()) {
 						JOptionPane.showMessageDialog(null,"Invalid end time, please re-enter yout data");
@@ -92,7 +91,8 @@ public class FileChooser {
 							break;
 						}
 					}
-					if(!check)
+					//Comment to ignore collisions
+//					if(!check)
 						model.add(event);
 				}
 			}

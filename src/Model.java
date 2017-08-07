@@ -89,6 +89,11 @@ public class Model {
 		events.add(event);
 	}
 	
+	public void save(Saver sav) {
+		this.saver.setSaver(sav);
+		this.saver.add();
+	}
+	
 //	/**
 //	 * Initiates the exit sequence by saving all the events in the list into persistent memory 
 //	 */

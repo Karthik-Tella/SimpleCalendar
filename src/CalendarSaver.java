@@ -3,6 +3,8 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+
+import javax.swing.JOptionPane;
 /**
  * The following class assists in storing and loading events from persistent memory
  * @author Karthik Tella
@@ -11,6 +13,7 @@ import java.util.*;
 public class CalendarSaver {
 	//instance variables
 	private Model model;
+	private Saver saver;
 
 	/**
 	 * Constructor of the class
@@ -19,6 +22,7 @@ public class CalendarSaver {
 	 */
 	public CalendarSaver(Model model) {
 		this.model = model;
+		saver = new TxtSaver();
 
 	}
 
@@ -96,7 +100,9 @@ public class CalendarSaver {
 	 * Saves all the events stored in the model into persistent memory
 	 */
 	public void add() {
-		File file = new File("C:\\Users\\karth\\Desktop\\summer 17\\cs 151\\Project\\GoogleCalendar\\src\\events.txt");		
+		String tag = saver.getExtension();
+//		JOptionPane.showMessageDialog(null, "Now saving into events"  + tag);
+		File file = new File("C:\\Users\\karth\\Desktop\\summer 17\\cs 151\\Project\\GoogleCalendar\\src\\events"+tag);		
 		if (!file.exists()) {
 			try {
 				file.createNewFile();
@@ -120,5 +126,9 @@ public class CalendarSaver {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public void setSaver(Saver saver) {
+		this.saver = saver;
 	}
 }
