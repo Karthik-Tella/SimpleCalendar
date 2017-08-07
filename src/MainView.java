@@ -42,121 +42,8 @@ public class MainView {
 		this.model = m;
 		this.cal = model.getCalendar();
 		state = Calendar.DAY_OF_MONTH;
-
-		//Button initialization
-		JButton today = new JButton("Today");
-		JButton prevButton = new JButton("<");
-		JButton nextButton = new JButton(">");
-		JButton dayButton = new JButton("Day");
-		JButton weekButton = new JButton("Week");
-		JButton monthButton = new JButton("Month");
-		JButton agendaButton = new JButton("Agenda");
-		JButton fromFile = new JButton("From File");
-
-		//Button functionality
-		today.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				model.reset();				
-			}
-		});
-
-		prevButton.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if(state != 0)
-					model.setPrev(state);
-				else
-					model.setPrev(Calendar.DAY_OF_MONTH);
-			}
-		});
-
-
-		nextButton.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if(state != 0)
-					model.setNext(state);
-				else
-					model.setNext(Calendar.DAY_OF_MONTH);
-			}
-		});
-
-		dayButton.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				state = Calendar.DAY_OF_MONTH;
-				dayView();
-			}
-		});
-
-		weekButton.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				state = Calendar.WEEK_OF_MONTH;
-				weekView();
-			}
-		});
-
-		monthButton.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				state = Calendar.MONTH;
-				monthView();
-			}
-		});
-
-		agendaButton.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				state = 0;
-				agendaView();
-			}
-		});
-
-		fromFile.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				FileChooser fc = new FileChooser(model);
-				repaint();
-			}
-		});
-
-		//Button style
 		Color buttonColor = new Color(245, 245, 245);
-		today.setBackground(buttonColor);
-		prevButton.setBackground(buttonColor);
-		nextButton.setBackground(buttonColor);
-		dayButton.setBackground(buttonColor);
-		weekButton.setBackground(buttonColor);
-		monthButton.setBackground(buttonColor);
-		agendaButton.setBackground(buttonColor);
-		fromFile.setBackground(buttonColor);
-
-
-		JPanel buttonHolder = new JPanel();
-		buttonHolder.setBackground(Color.WHITE);
-		buttonHolder.setBorder(new EmptyBorder(10, 10, 10, 10));
-		buttonHolder.setLayout(new BoxLayout(buttonHolder, BoxLayout.X_AXIS));
-		buttonHolder.add(today);
-		buttonHolder.add(Box.createRigidArea(new Dimension(5,0)));
-		buttonHolder.add(prevButton);
-		buttonHolder.add(nextButton);
-		buttonHolder.add(Box.createRigidArea(new Dimension(25,0)));
-		buttonHolder.add(dayButton);
-		buttonHolder.add(weekButton);
-		buttonHolder.add(monthButton);
-		buttonHolder.add(agendaButton);
-		buttonHolder.add(Box.createRigidArea(new Dimension(10,0)));
-		buttonHolder.add(fromFile);
+		Controller controller = new Controller(model, this);
 
 		//Month view
 		monthPanel = new JPanel();
@@ -241,7 +128,7 @@ public class MainView {
 		frame.setLayout(new BorderLayout());
 
 		//adding components
-		frame.add(buttonHolder, BorderLayout.NORTH);
+		frame.add(controller, BorderLayout.NORTH);
 		frame.add(monthView, BorderLayout.WEST);
 		frame.add(scroll, BorderLayout.EAST);
 		frame.setResizable(false);
@@ -616,5 +503,13 @@ public class MainView {
 		eventView.revalidate();
 		eventView.repaint();
 
+	}
+	
+	public int getState() {
+		return state;
+	}
+	
+	public void setState(int state) { 
+		this.state = state;
 	}
 }
