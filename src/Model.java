@@ -51,7 +51,7 @@ public class Model {
 	
 	public void alterMV(int num) {
 		cal.add(Calendar.MONTH, num);
-		view.repaintMonth();
+		view.repaintNavigation();
 	}
 	
 	public void reset() {
@@ -94,12 +94,6 @@ public class Model {
 		this.saver.add();
 	}
 	
-//	/**
-//	 * Initiates the exit sequence by saving all the events in the list into persistent memory 
-//	 */
-//	public void exitSeq() {
-//		System.out.println("Exit Sequence Status: 0");
-//		saver.quit();
-//	}
+
 
 }
