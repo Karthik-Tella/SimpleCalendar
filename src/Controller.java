@@ -138,7 +138,7 @@ public class Controller extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				FileChooser fc = new FileChooser(model);
-				repaint();
+				view.repaint();
 			}
 		});
 
